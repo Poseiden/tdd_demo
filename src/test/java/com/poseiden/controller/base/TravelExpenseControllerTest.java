@@ -51,4 +51,16 @@ public class TravelExpenseControllerTest extends APIBaseTest {
 
         assertEquals(29, Integer.parseInt(contentAsString));
     }
+
+    @Test
+    public void should_generate_waiting_expense_by_1_yuan_per_min_when_waiting() throws Exception {
+        long km = 2;
+        int waiting = 2;
+
+        String contentAsString = this.mockMvc.perform(get(String.format("/expense?km=%s&waiting=%s", km, waiting)))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+
+        assertEquals(8, Integer.parseInt(contentAsString));
+    }
 }

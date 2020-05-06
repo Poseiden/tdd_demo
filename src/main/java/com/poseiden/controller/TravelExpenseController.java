@@ -11,11 +11,19 @@ public class TravelExpenseController {
     private static final int SHORT_DISTANCE = 8;
 
     @GetMapping("/expense")
-    public int calculateExpense(@RequestParam("km") int distance) {
+    public int calculateExpense(@RequestParam("km") int distance, @RequestParam(required = false, defaultValue = "0") int waiting) {
+        int totalExpense = 0;
         if (lessEqualsThanBasePrice(distance)) {
-            return BASE_PRICE;
+             totalExpense = BASE_PRICE;
+        } else {
+            totalExpense = calculatePrice(distance);
         }
-        return calculatePrice(distance);
+        totalExpense += getWaitingExpense(waiting);
+        return totalExpense;
+    }
+
+    private int getWaitingExpense(int waiting) {
+        return waiting;
     }
 
     private int calculatePrice(int distance) {
