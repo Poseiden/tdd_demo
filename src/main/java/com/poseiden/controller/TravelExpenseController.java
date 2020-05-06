@@ -19,14 +19,22 @@ public class TravelExpenseController {
     }
 
     private int calculatePrice(int distance) {
-        if (distance > SHORT_DISTANCE) {
-            return shortDistanceExpense(distance) + (distance - 8) * 2;
+        if (isLongDistance(distance)) {
+            return shortDistanceExpense(distance) + longDistanceAdditionalExpense(distance);
         }
-        return (distance - 2) * 3 + BASE_PRICE;
+        return shortDistanceExpense(distance);
     }
 
-    private int shortDistanceExpense(int km) {
-        return (km - 2) * 3 + BASE_PRICE;
+    private boolean isLongDistance(int distance) {
+        return distance > SHORT_DISTANCE;
+    }
+
+    private int longDistanceAdditionalExpense(int distance) {
+        return (distance - 8) * 2;
+    }
+
+    private int shortDistanceExpense(int distance) {
+        return (distance - 2) * 3 + BASE_PRICE;
     }
 
     private boolean lessEqualsThanBasePrice(int km) {
