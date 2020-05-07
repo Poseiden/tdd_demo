@@ -9,9 +9,20 @@ public class TaxiExpenseController {
 
     @GetMapping("/fee")
     public int calculateFee(@RequestParam int distance) {
-        if (distance > 2) {
-            return (distance - 2) * 3 + 6;
+        int baseDistance = 2;
+        int basePrice = 6;
+        if (biggerThanBaseDistance(distance, baseDistance)) {
+            int price = 3;
+            return calculateActualPrice(distance, baseDistance, basePrice, price);
         }
-        return 6;
+        return basePrice;
+    }
+
+    private int calculateActualPrice(int distance, int baseDistance, int basePrice, int price) {
+        return (distance - baseDistance) * price + basePrice;
+    }
+
+    private boolean biggerThanBaseDistance(int distance, int baseDistance) {
+        return distance > baseDistance;
     }
 }
