@@ -19,7 +19,11 @@ public class TaxiExpenseController {
     }
 
     private int calculateActualPrice(int distance, int baseDistance, int basePrice, int price) {
-        return (distance - baseDistance) * price + basePrice;
+        if (distance > 8) {
+            return (distance - baseDistance) * price + basePrice + (distance - 8) * 2;
+        } else {
+            return (distance - baseDistance) * price + basePrice;
+        }
     }
 
     private boolean biggerThanBaseDistance(int distance, int baseDistance) {

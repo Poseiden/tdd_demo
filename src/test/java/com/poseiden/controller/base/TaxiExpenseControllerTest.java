@@ -42,4 +42,17 @@ public class TaxiExpenseControllerTest extends APIBaseTest {
         //then
         assertEquals(9, Integer.parseInt(mvcResult.getResponse().getContentAsString()));
     }
+
+    @Test
+    public void should_pay_29_yuan_when_km_equals_9() throws Exception{
+        //given
+        int distance = 9;
+
+        //when
+        MvcResult mvcResult = this.mockMvc.perform(get(String.format("/fee?distance=%s", distance))).andReturn();
+
+        //then
+        assertEquals(29, Integer.parseInt(mvcResult.getResponse().getContentAsString()));
+    }
+
 }
