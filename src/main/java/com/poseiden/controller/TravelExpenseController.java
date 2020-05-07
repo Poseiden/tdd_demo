@@ -18,8 +18,7 @@ public class TravelExpenseController {
         } else {
             totalExpense = calculatePrice(distance);
         }
-        totalExpense += getWaitingExpense(waiting);
-        return totalExpense;
+        return totalExpense + getWaitingExpense(waiting);
     }
 
     private int getWaitingExpense(int waiting) {
