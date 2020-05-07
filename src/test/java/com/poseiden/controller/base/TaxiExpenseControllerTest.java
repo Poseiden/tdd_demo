@@ -18,4 +18,16 @@ public class TaxiExpenseControllerTest extends APIBaseTest {
         //then
         assertEquals(6, Integer.parseInt(mvcResult.getResponse().getContentAsString()));
     }
+
+    @Test
+    public void should_pay_6_yuan_when_km_equals_2() throws Exception{
+        //given
+        int distance = 2;
+
+        //when
+        MvcResult mvcResult = this.mockMvc.perform(get(String.format("/fee?distance=%s", distance))).andReturn();
+
+        //then
+        assertEquals(6, Integer.parseInt(mvcResult.getResponse().getContentAsString()));
+    }
 }
