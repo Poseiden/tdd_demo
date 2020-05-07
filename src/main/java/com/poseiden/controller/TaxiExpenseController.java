@@ -23,11 +23,21 @@ public class TaxiExpenseController {
     }
 
     private int calculateActualPrice(int distance, int baseDistance, int basePrice, int price) {
-        if (distance > 8) {
-            return (distance - baseDistance) * price + basePrice + (distance - 8) * 2;
+        int longMeters = 8;
+        if (distance > longMeters) {
+            return calculateTravelExpense(distance, baseDistance, basePrice, price)
+                    + calculateLongTravelExpense(distance, longMeters);
         } else {
-            return (distance - baseDistance) * price + basePrice;
+            return calculateTravelExpense(distance,baseDistance, basePrice, price);
         }
+    }
+
+    private int calculateLongTravelExpense(int distance, int longMeters) {
+        return (distance - longMeters) * 2;
+    }
+
+    private int calculateTravelExpense(int distance, int baseDistance, int basePrice, int price) {
+        return (distance - baseDistance) * price + basePrice;
     }
 
     private boolean biggerThanBaseDistance(int distance, int baseDistance) {
