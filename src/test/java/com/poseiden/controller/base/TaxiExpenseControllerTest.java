@@ -55,4 +55,17 @@ public class TaxiExpenseControllerTest extends APIBaseTest {
         assertEquals(29, Integer.parseInt(mvcResult.getResponse().getContentAsString()));
     }
 
+    @Test
+    public void should_pay_7_yuan_when_km_equals_2_and_waiting_for_1_min() throws Exception{
+        //given
+        int distance = 2;
+
+        //when
+        int waiting = 1;
+        MvcResult mvcResult = this.mockMvc.perform(get(String.format("/fee?distance=%s&waiting=%s", distance, waiting))).andReturn();
+
+        //then
+        assertEquals(7, Integer.parseInt(mvcResult.getResponse().getContentAsString()));
+    }
+
 }

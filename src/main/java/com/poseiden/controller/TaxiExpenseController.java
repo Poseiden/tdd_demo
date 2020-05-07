@@ -8,14 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaxiExpenseController {
 
     @GetMapping("/fee")
-    public int calculateFee(@RequestParam int distance) {
+    public int calculateFee(@RequestParam int distance, @RequestParam(defaultValue = "0") int waiting) {
         int baseDistance = 2;
         int basePrice = 6;
+        int totalPrice = 0;
         if (biggerThanBaseDistance(distance, baseDistance)) {
             int price = 3;
-            return calculateActualPrice(distance, baseDistance, basePrice, price);
+            totalPrice = calculateActualPrice(distance, baseDistance, basePrice, price);
+        } else {
+            totalPrice = basePrice;
         }
-        return basePrice;
+
+        return totalPrice + waiting;
     }
 
     private int calculateActualPrice(int distance, int baseDistance, int basePrice, int price) {
