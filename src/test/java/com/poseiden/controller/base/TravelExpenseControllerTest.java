@@ -10,45 +10,57 @@ public class TravelExpenseControllerTest extends APIBaseTest {
 
     @Test
     public void should_pay_6_yuan_when_km_less_than_2_km()  throws Exception {
+        //given
         long km = 1;
 
+        //when
         String contentAsString = this.mockMvc.perform(get(String.format("/expense?km=%s", km)))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
+        //then
         assertEquals(6, Integer.parseInt(contentAsString));
     }
 
     @Test
     public void should_pay_6_yuan_when_km_equals_2_km() throws Exception {
+        //given
         long km = 2;
 
+        //when
         String contentAsString = this.mockMvc.perform(get(String.format("/expense?km=%s", km)))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
+        //then
         assertEquals(6, Integer.parseInt(contentAsString));
     }
 
     @Test
     public void should_pay_per_km_2_yuan_when_exceed_2_km() throws Exception {
+        //given
         long km = 3;
 
+        //when
         String contentAsString = this.mockMvc.perform(get(String.format("/expense?km=%s", km)))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
+        //then
         assertEquals(9, Integer.parseInt(contentAsString));
     }
 
     @Test
     public void should_pay_long_distance_fee_by_per_km_when_more_than_8_km() throws Exception {
+        //given
         long km = 9;
 
+        //when
         String contentAsString = this.mockMvc.perform(get(String.format("/expense?km=%s", km)))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
+        //then
         assertEquals(29, Integer.parseInt(contentAsString));
     }
 
