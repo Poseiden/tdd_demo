@@ -1,11 +1,14 @@
-package com.poseiden.controller.base;
+package com.poseiden.controller;
 
+import com.poseiden.controller.base.APIBaseTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
+@Ignore
 public class TaxiExpenseControllerTest extends APIBaseTest {
     @Test
     public void should_pay_6_yuan_when_km_less_than_2() throws Exception{

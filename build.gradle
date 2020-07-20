@@ -6,6 +6,15 @@
  * User Manual available at https://docs.gradle.org/6.1.1/userguide/java_library_plugin.html
  */
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.2.5.RELEASE"
+        classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:2.2.3.RELEASE"
+    }
+}
 plugins {
     id 'idea'
     // Apply the java-library plugin to add support for Java Library
@@ -13,11 +22,19 @@ plugins {
     // id 'checkstyle'
     id 'org.springframework.boot' version '2.2.5.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'org.springframework.cloud.contract' version '2.2.3.RELEASE'
 }
+
 
 group = 'com.poseiden'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.11'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-contract-dependencies:2.2.3.RELEASE"
+    }
+}
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -51,9 +68,16 @@ dependencies {
 
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
     testImplementation 'com.h2database:h2:1.4.199'
 
     testImplementation 'org.projectlombok:lombok:1.18.10'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.10'
 
+}
+
+contracts {
+    testMode = 'MockMvc'
+    baseClassForTests = 'com.poseiden.controller.base.APIBaseTest'
+    generatedTestSourcesDir = project.file('build/generated-test-sources/generatedContract')
 }

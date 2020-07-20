@@ -1,5 +1,6 @@
-package com.poseiden.controller.base;
+package com.poseiden.controller;
 
+import com.poseiden.controller.base.APIBaseTest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
