@@ -42,7 +42,10 @@ public abstract class APIBaseTest {
                 apply(springSecurity()).
                 build();
 
-        RestAssuredMockMvc.standaloneSetup(helloController,
-                springSecurity((request, response, chain) -> chain.doFilter(request, response)));
+        // standaloneSetup
+//        RestAssuredMockMvc.standaloneSetup(this.mockMvc,
+//                springSecurity((request, response, chain) -> chain.doFilter(request, response)));
+
+        RestAssuredMockMvc.mockMvc(this.mockMvc);
     }
 }
