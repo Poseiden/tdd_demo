@@ -78,6 +78,6 @@ dependencies {
 
 contracts {
     testMode = 'MockMvc'
-    baseClassForTests = 'com.poseiden.controller.base.APIBaseTest'
     generatedTestSourcesDir = project.file('build/generated-test-sources/generatedContract')
+    packageWithBaseClasses = "com.poseiden.contracttest.base"
 }

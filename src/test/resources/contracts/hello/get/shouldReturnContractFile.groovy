@@ -1,4 +1,4 @@
-package contracts
+package hello.get
 
 import org.springframework.cloud.contract.spec.Contract;
 
@@ -14,7 +14,7 @@ Contract.make {
     }
 
     response {
-        body("something")
+        body("this should be a mock value")
         status 200
     }
 }
